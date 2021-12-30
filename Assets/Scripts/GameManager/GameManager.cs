@@ -23,7 +23,6 @@ namespace UnderdogCity
             }
         }
 
-        // Use this for initialization
         void Start()
         {
             LocalPlayer = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity).GetComponent<Player>();
@@ -31,12 +30,12 @@ namespace UnderdogCity
                 PhotonNetwork.InstantiateSceneObject("Car", new Vector3(0, 1, 20), Quaternion.identity);
         }
 
-        // Update is called once per frame
-        void Update()
+       
+
+        public override void OnPlayerPropertiesUpdate(Photon.Realtime.Player target, ExitGames.Client.Photon.Hashtable changedProps)
         {
-
+            foreach(var change in changedProps)
+                Debug.Log("Property " + change.Key + " of player " + target.UserId + " changed to " + change.Value);
         }
-
-        
     }
 }

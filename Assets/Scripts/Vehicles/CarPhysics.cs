@@ -90,13 +90,15 @@ namespace UnderdogCity
                 ffriction.asymptoteSlip = 2f;
                 ffriction.stiffness = Grip;
                 sfriction.extremumValue = 1f;
-                sfriction.asymptoteValue = Wheels[i].WheelCollider.sidewaysFriction.extremumValue * KeepGrip * 0.998f;
+                sfriction.asymptoteValue = Wheels[i].WheelCollider.sidewaysFriction.extremumValue * KeepGrip * 0.998f + 0.002f;
                 sfriction.extremumSlip = 0.5f;
-                
+                sfriction.asymptoteSlip = 1f;
+                sfriction.stiffness = Grip;
+                Wheels[i].WheelCollider.forwardFriction = ffriction;
+                Wheels[i].WheelCollider.sidewaysFriction = sfriction;
             }
         }
 
-        
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
             if (stream.IsWriting)
